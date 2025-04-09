@@ -1,16 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_errors.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/08 20:18:59 by saskin            #+#    #+#             */
+/*   Updated: 2025/04/09 04:12:35 by saskin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "so_long.h"
 
-// void	exit_with_error(char *msg, t_data *data)
-// {
-// 	if (data)
-// 	{
-// 		if (data->map.map)
-// 			free_fonc(data->map.map);
-// 		free(data);
-// 	}
-// 	ft_printf("%s\n", msg);
-// 	exit(1);
-// }
 void	free_fonc(char **map)
 {
 	int	i;
@@ -33,22 +35,63 @@ void	exit_simple_error(char *str)
 void	free_and_exit(t_game *game)
 {
 	free_map(game);
-	// cleanup_mlx(game);
 	exit(1);
 }
-void	free_map(t_game *game)
+void free_map(t_game *game)
 {
-	int i;
+    int i;
+ 
+    if (!game->map)
+        return;
 
-	if (!game->map)
-		return;
-	i = 0;
-	while (i < game->height)
-	{
-		if (game->map[i])
-			free(game->map[i]);
-		i++;
-	}
-	free(game->map);
-	game->map = NULL;
+    i = 0;
+    while (i < game->height)
+    {
+        if (game->map[i])
+            free(game->map[i]);
+        i++;
+    }
+    free(game->map);
+    game->map = NULL;
 }
+void destroy_images(t_game *game)
+{
+    if (!game || !game->img)
+        return;
+
+    if (game->img->player)
+        mlx_destroy_image(game->mlx, game->img->player);
+    if (game->img->coin)
+        mlx_destroy_image(game->mlx, game->img->coin);
+    if (game->img->wall)
+        mlx_destroy_image(game->mlx, game->img->wall);
+    if (game->img->ground)
+        mlx_destroy_image(game->mlx, game->img->ground);
+    if (game->img->exit)
+        mlx_destroy_image(game->mlx, game->img->exit);
+		free(game->img);
+}   
+void destroy_all(t_game *game)
+{
+		if (!game)
+			return;
+	
+		destroy_images(game);
+	
+		if (game->win)
+		{
+			mlx_destroy_window(game->mlx, game->win);
+			game->win = NULL;
+		}
+	
+		mlx_destroy_display(game->mlx);
+	
+		if (game->mlx)
+		{
+			free(game->mlx);
+			game->mlx = NULL;
+		}
+
+		free_map(game);
+}	
+	
