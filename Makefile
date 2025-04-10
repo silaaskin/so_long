@@ -6,7 +6,7 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 PRINTF = ft_printf/libftprintf.a
 
-SRC = main.c check_map.c control.c flood_fill.c free_errors.c utils.c walk.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = main.c check_map.c control.c flood_fill.c check_utils.c handle_keypress.c init_player.c free_errors.c utils.c walk.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 OBJS = $(SRC:.c=.o)
 
 all: $(NAME)
