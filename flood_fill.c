@@ -6,7 +6,7 @@
 /*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 02:12:00 by saskin            #+#    #+#             */
-/*   Updated: 2025/04/10 10:13:25 by saskin           ###   ########.fr       */
+/*   Updated: 2025/04/11 01:25:33 by saskin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,9 @@ void	flood_fill(char **map, t_game *game, int x, int y)
 		game->collected++;
 	if (map[x][y] == 'E')
 	{
-		if ((x > 0 && map[x - 1][y] != '1' && map[x - 1][y] != 'E') ||
-			(x < game->height - 1 && map[x + 1][y] != '1' &&
-			map[x + 1][y] != 'E') ||
-			(y > 0 && map[x][y - 1] != '1' && map[x][y - 1] != 'E') ||
-			(y < cols - 1 && map[x][y + 1] != '1' && map[x][y + 1] != 'E'))
+		if (map[x - 1][y] != '1' || map[x + 1][y] != '1' ||
+			map[x][y - 1] != '1' || map[x][y + 1] != '1')
 			game->can_exit = 1;
-		return ;
 	}
 	map[x][y] = 'V';
 	flood_fill(map, game, x + 1, y);

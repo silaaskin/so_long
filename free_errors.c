@@ -6,7 +6,7 @@
 /*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 20:18:59 by saskin            #+#    #+#             */
-/*   Updated: 2025/04/10 09:25:41 by saskin           ###   ########.fr       */
+/*   Updated: 2025/04/11 00:00:44 by saskin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ void	destroy_images(t_game *game)
 
 void	ft_free(t_game *game, int flg)
 {
-	int	i;
-
-	i = 0;
 	free_map(game);
 	destroy_images(game);
 	if (game->win)

@@ -6,7 +6,7 @@
 /*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 01:42:02 by saskin            #+#    #+#             */
-/*   Updated: 2025/04/10 10:21:29 by saskin           ###   ########.fr       */
+/*   Updated: 2025/04/11 01:22:00 by saskin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	move_player(t_game *game, int new_x, int new_y)
 		a = 0;
 	}
 	if (game->coin_cnt == 0 && game->map[new_x][new_y] == 'E')
-		return (prepare_to_end(game));
+		prepare_to_end(game);
 	else if (game->map[new_x][new_y] == 'C')
 		game->coin_cnt--;
 	else if (game->map[new_x][new_y] == '1')
 		return ;
 	if (game->coin_cnt != 0 && game->map[new_x][new_y] == 'E')
-		return (enter_exit_cell(game, new_x, new_y, &a));
+		enter_exit_cell(game, new_x, new_y, &a);
 	++game->moves;
 	print_score(game);
 	update_position(game, new_x, new_y);
